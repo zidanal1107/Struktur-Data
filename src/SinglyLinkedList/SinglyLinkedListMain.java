@@ -1,4 +1,4 @@
-package LinkedList;
+package SinglyLinkedList;
 
 class Node {
     int data;
@@ -10,12 +10,12 @@ class Node {
     }
 }
 
-class MyLinkedList {
+class MySinglyLinkedList {
     Node head;
     Node tail;
     int size;
 
-    public MyLinkedList() {
+    public MySinglyLinkedList() {
         head = null;
         tail = null;
         size = 0;
@@ -94,16 +94,54 @@ class MyLinkedList {
         size--;
     }
 
+    public void removeLast() {
+        if (isEmpty())
+            throw new RuntimeException("Linked list is empty");
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            Node current = head;
+            while (current.next != tail) {
+                current = current.next;
+            }
+            current.next = null;
+            tail=current;
+        }
+        size--;
+    }
+
     public void clear() {
         head = null;
         tail = null;
         size = 0;
     }
+
+    public int get(int index) {
+        if (isEmpty())
+            throw new RuntimeException("Linked list is empty");
+        if (index < 0 || index >= size)
+            throw new IndexOutOfBoundsException("Invalid index");
+        Node current = head;
+        for (int i = 0;i < index;i++) {
+            current = current.next;
+        }
+        return current.data;
+    }
+
+    public void set(int index, int data) {
+        if (index < 0 || index >= size)
+            throw new IndexOutOfBoundsException("Invalid index");
+        Node current = head;
+        for (int i = 0;i < index;i++) {
+            current = current.next;
+        }
+        current.data = data;
+    }
 }
 
-public class LinkedListMain {
+public class SinglyLinkedListMain {
     public static void main(String[] args) {
-        MyLinkedList li = new MyLinkedList();
+        MySinglyLinkedList li = new MySinglyLinkedList();
 
         try {
             li.addLast(1);
@@ -112,17 +150,24 @@ public class LinkedListMain {
             li.addFirst(3);
             li.addFirst(4);
 
-            li.removeFirst();
+//            li.removeFirst();
+            li.removeLast();
 
             li.addLast(5);
 
-            li.clear();
+//            li.clear();
+
+            li.set(0,20);
 
             li.print();
 
             System.out.println(li.contains(4));
             System.out.println(li.getFirst());
             System.out.println(li.getLast());
+            System.out.println(li.get(2));
+
+        } catch (IndexOutOfBoundsException ie) {
+            System.out.println(ie.getMessage());
         } catch (RuntimeException re) {
             System.out.println(re.getMessage());
         }
