@@ -32,11 +32,11 @@ class MyLinkedList {
     public void addFirst(int data) {
         Node newNode = new Node(data);
         if (isEmpty()) {
-            head=newNode;
-            tail=newNode;
+            head = newNode;
+            tail = newNode;
         } else {
-            newNode.next=head;
-            head=newNode;
+            newNode.next = head;
+            head = newNode;
         }
         size++;
     }
@@ -44,10 +44,10 @@ class MyLinkedList {
     public void addLast(int data) {
         Node newNode = new Node(data);
         if (isEmpty()) {
-            head=tail=newNode;
+            head = tail = newNode;
         } else {
-            tail.next=newNode;
-            tail=newNode;
+            tail.next = newNode;
+            tail = newNode;
         }
         size++;
     }
@@ -55,10 +55,10 @@ class MyLinkedList {
     public void print() {
         Node current = head;
         while (current != null) {
-            System.out.print(current.data+" ");
+            System.out.print(current.data + " ");
             current = current.next;
         }
-        System.out.println("\nLinked list size: "+size);
+        System.out.println("\nLinked list size: " + size);
     }
 
     public boolean contains(int data) {
@@ -66,7 +66,7 @@ class MyLinkedList {
         while (current != null) {
             if (current.data == data)
                 return true;
-            current=current.next;
+            current = current.next;
         }
         return false;
     }
@@ -82,20 +82,49 @@ class MyLinkedList {
             throw new RuntimeException("Linked list is empty");
         return tail.data;
     }
+
+    public void removeFirst() {
+        if (isEmpty())
+            throw new RuntimeException("Linked list is empty");
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            head = head.next;
+        }
+        size--;
+    }
+
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
 }
 
 public class LinkedListMain {
     public static void main(String[] args) {
         MyLinkedList li = new MyLinkedList();
 
-        li.addLast(1);
-        li.addLast(2);
-        li.addFirst(3);
-        li.addFirst(4);
-        li.addLast(5);
-        li.print();
-        System.out.println(li.contains(4));
-        System.out.println(li.getFirst());
-        System.out.println(li.getLast());
+        try {
+            li.addLast(1);
+            li.addLast(2);
+
+            li.addFirst(3);
+            li.addFirst(4);
+
+            li.removeFirst();
+
+            li.addLast(5);
+
+            li.clear();
+
+            li.print();
+
+            System.out.println(li.contains(4));
+            System.out.println(li.getFirst());
+            System.out.println(li.getLast());
+        } catch (RuntimeException re) {
+            System.out.println(re.getMessage());
+        }
     }
 }

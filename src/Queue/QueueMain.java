@@ -159,7 +159,7 @@ class MyQueueCircular {
         if (isEmpty())
             return -1;
         int c = front;
-        for (int i = 0;i < nItem;i++) {
+        for (int i = 0; i < nItem; i++) {
             if (array[c] == data)
                 return i;
             c = (c + 1) % maxSize;
@@ -172,21 +172,25 @@ public class QueueMain {
     public static void main(String[] args) {
         MyQueueCircular mq = new MyQueueCircular(5);
 
-        mq.enqueue(10);
-        mq.enqueue(20);
-        mq.enqueue(30);
-        mq.enqueue(40);
-        mq.enqueue(50);
+        try {
+            mq.enqueue(10);
+            mq.enqueue(20);
+            mq.enqueue(30);
+            mq.enqueue(40);
+            mq.enqueue(50);
 
-        mq.dequeue();
-        mq.dequeue();
-        mq.dequeue();
+            mq.dequeue();
+            mq.dequeue();
+            mq.dequeue();
 
-        mq.enqueue(60);
-        mq.read();
-        System.out.println(mq.nItem);
-        System.out.println(mq.peek());
-        System.out.println(mq.contains(30));
-        System.out.println(mq.search(60));
+            mq.enqueue(60);
+            mq.read();
+            System.out.println(mq.nItem);
+            System.out.println(mq.peek());
+            System.out.println(mq.contains(30));
+            System.out.println(mq.search(60));
+        } catch (RuntimeException re) {
+            System.out.println(re.getMessage());
+        }
     }
 }
