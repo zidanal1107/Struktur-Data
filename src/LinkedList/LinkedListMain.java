@@ -29,6 +29,18 @@ class MyLinkedList {
         return size;
     }
 
+    public void addFirst(int data) {
+        Node newNode = new Node(data);
+        if (isEmpty()) {
+            head=newNode;
+            tail=newNode;
+        } else {
+            newNode.next=head;
+            head=newNode;
+        }
+        size++;
+    }
+
     public void addLast(int data) {
         Node newNode = new Node(data);
         if (isEmpty()) {
@@ -48,6 +60,28 @@ class MyLinkedList {
         }
         System.out.println("\nLinked list size: "+size);
     }
+
+    public boolean contains(int data) {
+        Node current = head;
+        while (current != null) {
+            if (current.data == data)
+                return true;
+            current=current.next;
+        }
+        return false;
+    }
+
+    public int getFirst() {
+        if (isEmpty())
+            throw new RuntimeException("Linked list is empty");
+        return head.data;
+    }
+
+    public int getLast() {
+        if (isEmpty())
+            throw new RuntimeException("Linked list is empty");
+        return tail.data;
+    }
 }
 
 public class LinkedListMain {
@@ -56,7 +90,12 @@ public class LinkedListMain {
 
         li.addLast(1);
         li.addLast(2);
-        li.addLast(3);
+        li.addFirst(3);
+        li.addFirst(4);
+        li.addLast(5);
         li.print();
+        System.out.println(li.contains(4));
+        System.out.println(li.getFirst());
+        System.out.println(li.getLast());
     }
 }
