@@ -1,4 +1,4 @@
-package SinglyLinkedList;
+package belajar.SinglyLinkedList;
 
 class Node {
     int data;

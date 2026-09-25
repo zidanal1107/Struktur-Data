@@ -1,4 +1,4 @@
-package DoublyLinkedList;
+package belajar.DoublyLinkedList;
 
 class Node {
     int data;

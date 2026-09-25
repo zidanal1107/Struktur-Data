@@ -1,4 +1,4 @@
-package Queue;
+package belajar.Queue;
 
 class MyQueue {
     int front;

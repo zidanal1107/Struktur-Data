@@ -1,4 +1,4 @@
-package Stack;
+package belajar.Stack;
 
 class MyStack {
     int[] array;
