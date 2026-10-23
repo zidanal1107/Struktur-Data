@@ -1,4 +1,4 @@
-package praktikum.demo;
+package praktikum.demo.Services;
 
 public class Customer<T>{
     private String name;

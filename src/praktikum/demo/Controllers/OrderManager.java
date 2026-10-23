@@ -1,4 +1,7 @@
-package praktikum.demo.Services;
+package praktikum.demo.Controllers;
+
+import praktikum.demo.Services.FoodOrder;
+import praktikum.demo.Services.OrderItem;
 
 import java.util.ArrayList;
 
@@ -11,6 +14,14 @@ public class OrderManager {
 
     public void addOrder(FoodOrder<?> foodOrder) {
         arrayList.add(foodOrder);
+    }
+
+    public boolean findDatas(int index) {
+        return index >= 0 && index < arrayList.size();
+    }
+
+    public void remove(int index) {
+        arrayList.remove(index);
     }
 
     public void addItem(String code, OrderItem item) {

@@ -1,7 +1,4 @@
-package praktikum.demo.Data.LinkedList;
-
-import praktikum.demo.Services.FoodCategory;
-import praktikum.demo.Services.OrderItem;
+package praktikum.demo.Data.MyLinkedList;
 
 public class MyLinkedList<T> {
     private Node head;
@@ -58,23 +55,92 @@ public class MyLinkedList<T> {
             throw new IndexOutOfBoundsException("Data is empty");
         } else {
             while (current != null) {
-                System.out.print(current.getData()+" ");
+                System.out.println(" "+current.getData());
                 current=current.getNext();
             }
             System.out.println();
         }
     }
+    public void set(int index,T newData) {
+        Node current=head;
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Data is empty");
+        } else if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Data not found");
+        } else {
+            int i=-1;
+            while (current != null) {
+                i++;
+                if (index == i) {
+                    current.setData(newData);
+                    return;
+                }
+                current=current.getNext();
+            }
+        }
+    }
+    public boolean findData(T data) {
+        Node current=head;
+        while (current!=null) {
+            if (current==data) return true;
+            current=current.getNext();
+        }
+        return false;
+    }
+    public void remove(int index) {
+        Node current=head;
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Data is empty");
+        } else if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Data not found");
+        } else {
+            int i=-1;
+            while (current != null) {
+                i++;
+                if (index == i) {
+                    if (current == head) {
+                        head=current.getNext();
+                        if (head != null) {
+                            head.setPrev(null);
+                        }
+                        return;
+                    } else {
+                        Node next=current.getNext();
+                        Node prev=current.getPrev();
+                        prev.setNext(next);
+                        if (next != null) {
+                            next.setPrev(prev);
+                        }
+                        return;
+                    }
+                }
+                current=current.getNext();
+                size--;
+            }
+        }
+    }
 
     public static void main(String[] args) {
-        MyLinkedList<OrderItem> linkedList = new MyLinkedList<>();
-        OrderItem orderItem1 = new OrderItem("Ayam", FoodCategory.FOOD,2);
-        OrderItem orderItem2 = new OrderItem("Ayam Geprek", FoodCategory.FOOD,1);
-        OrderItem orderItem3 = new OrderItem("Nasgor", FoodCategory.FOOD,1);
-        linkedList.addFirst(orderItem1);
-        linkedList.addFirst(orderItem2);
-        linkedList.addLast(orderItem3);
+        try {
+//            MyLinkedList<OrderItem> linkedList = new MyLinkedList<>();
+//            OrderItem orderItem1 = new OrderItem("Ayam", FoodCategory.FOOD,2);
+//            OrderItem orderItem2 = new OrderItem("Ayam Geprek", FoodCategory.FOOD,1);
+//            OrderItem orderItem3 = new OrderItem("Nasgor", FoodCategory.FOOD,1);
+//            linkedList.addFirst(orderItem1);
+//            linkedList.addFirst(orderItem2);
+//            linkedList.addLast(orderItem3);
+//
+//            linkedList.print();
+//            System.out.println(linkedList.size);
+//
+//            OrderItem orderItem4 = new OrderItem("Batagor", FoodCategory.FOOD,1);
+//            linkedList.set(2,orderItem4);
+//            linkedList.remove(1);
+//            linkedList.print();
+//            System.out.println(linkedList.size);
 
-        linkedList.print();
-        System.out.println(linkedList.size);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -1,15 +1,26 @@
-package praktikum.demo;
+package praktikum.demo.Services;
+
+import praktikum.demo.Data.MyLinkedList.MyLinkedList;
+import praktikum.demo.Data.MyLinkedList.Node;
 
 public class FoodOrder<T> extends Customer<T> {
     private String code;
-    private String menuName;
-    private FoodCategory foodCategory;
+    private MyLinkedList<OrderItem> linkedList;
 
-    public FoodOrder(String name, T id, String code,String menuName, FoodCategory foodCategory) {
+    public FoodOrder(String name, T id, String code) {
         super(name, id);
         this.code = code;
-        this.menuName = menuName;
-        this.foodCategory = foodCategory;
+        this.linkedList = new MyLinkedList<>();
+    }
+
+    public void getItem() {
+        linkedList.print();
+    }
+    public boolean find(OrderItem data) {
+        return linkedList.findData(data);
+    }
+    public void addItem(OrderItem orderItem) {
+        linkedList.addNormalPassenger(orderItem);
     }
 
     public String getCode() {
@@ -18,21 +29,5 @@ public class FoodOrder<T> extends Customer<T> {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    public FoodCategory getFoodCategory() {
-        return foodCategory;
-    }
-
-    public void setFoodCategory(FoodCategory foodCategory) {
-        this.foodCategory = foodCategory;
     }
 }

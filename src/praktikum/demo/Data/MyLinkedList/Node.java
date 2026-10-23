@@ -1,4 +1,4 @@
-package praktikum.demo.Data.LinkedList;
+package praktikum.demo.Data.MyLinkedList;
 
 public class Node<T> {
     private T data;
