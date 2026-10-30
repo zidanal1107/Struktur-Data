@@ -1,4 +1,4 @@
-package praktikum.module1.codelab;
+package praktikum.module1;
 
 public class GenericTicket<T> {
     private T ticketCode;

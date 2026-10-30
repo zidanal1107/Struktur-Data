@@ -1,4 +1,4 @@
-package praktikum.module2.codelab;
+package praktikum.module2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
