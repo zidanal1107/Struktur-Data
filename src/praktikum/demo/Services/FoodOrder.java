@@ -1,7 +1,6 @@
 package praktikum.demo.Services;
 
 import praktikum.demo.Data.MyLinkedList.MyLinkedList;
-import praktikum.demo.Data.MyLinkedList.Node;
 
 public class FoodOrder<T> extends Customer<T> {
     private String code;
@@ -14,7 +13,7 @@ public class FoodOrder<T> extends Customer<T> {
     }
 
     public void getItem() {
-        linkedList.print();
+        linkedList.dispaly();
     }
     public boolean find(OrderItem data) {
         return linkedList.findData(data);
