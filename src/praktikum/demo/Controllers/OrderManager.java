@@ -6,6 +6,7 @@ import praktikum.demo.Services.FoodOrder;
 import praktikum.demo.Services.OrderItem;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class OrderManager {
     private ArrayList<FoodOrder<?>> arrayList;
@@ -25,22 +26,30 @@ public class OrderManager {
     public void addOrderQueue(FoodOrder<?> foodOrder) {
         queue.enqueue(foodOrder);
     }
+
     public void addOrderStack(FoodOrder<?> foodOrder) {
         stack.push(foodOrder);
     }
 
     public void processOrder() {
+        if (queue.isEmpty()) {
+            System.out.println("\n========================");
+            System.out.println("Queue is empty");
+            System.out.println("========================\n");
+            return;
+        }
         addOrderStack(queue.peek());
-        remove(0);
+        arrayList.remove(0);
 
         FoodOrder<?> order = queue.dequeue();
         System.out.println("\n========================");
         System.out.println("=== PROCESSING ORDER ===");
-        System.out.println("Processing order: "+ order.getCode());
-        System.out.println("Customer\t\t: "+ order.getName());
+        System.out.println("Processing order: " + order.getCode());
+        System.out.println("Customer\t\t: " + order.getName());
         System.out.println("\nOrder processed successfully.");
         System.out.println("========================\n");
     }
+
     public void transactionHistory() {
         System.out.println("\n===========================");
         System.out.println("=== TRANSACTION HISTORY ===");
@@ -61,19 +70,43 @@ public class OrderManager {
             System.out.println("===========================\n");
         }
     }
+
     public void undoTransaction() {
+        if (stack.isEmpty()) {
+            System.out.println("\nNo transactions available.\n");
+            return;
+        }
         FoodOrder<?> order = stack.pop();
         addOrderArrayList(order);
         addOrderQueue(order);
-        System.out.println("\nUndo transaction successfully\n");
+        System.out.println("\nUndo transaction successfully.\n");
     }
 
     public boolean findDatas(int index) {
         return index >= 0 && index < arrayList.size();
     }
 
-    public void remove(int index) {
+    public void remove(Scanner in) {
+        if (arrayList.isEmpty()) {
+            System.out.println("\nData is empty.\n");
+            return;
+        }
+        int i=0;
+        System.out.println("\n============================");
+        for (FoodOrder order: arrayList) {
+            i++;
+            System.out.print(i+". "+order.getCode()+" - "+order.getName());
+            System.out.println();
+        }
+        System.out.println("============================");
+        System.out.print("Choose number: ");
+        int index = in.nextInt();
+        in.nextLine();
+        index = index-1;
+        FoodOrder order = arrayList.get(index);
+        queue.remove(index);
         arrayList.remove(index);
+        System.out.println("Deleted: Name ["+order.getName()+"] Code ["+order.getCode()+"]\n");
     }
 
     public void addItem(String code, OrderItem item) {
@@ -89,8 +122,10 @@ public class OrderManager {
     public void display() {
         System.out.println("\n=========================");
         System.out.println("=== ALL ACTIVE ORDERS ===");
-        if (arrayList.isEmpty()){
+        if (arrayList.isEmpty()) {
             System.out.println("Active order is empty");
+            System.out.println("=========================\n");
+            return;
         }
         for (FoodOrder<?> order : arrayList) {
             System.out.println("=========================");

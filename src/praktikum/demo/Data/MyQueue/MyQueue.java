@@ -26,6 +26,11 @@ public class MyQueue<T> {
         linkedList.remove(0);
         return data;
     }
+    public void remove(int index) {
+        if (isEmpty())
+            throw new IndexOutOfBoundsException("Queue is empty");
+        linkedList.remove(index);
+    }
     public void display() {
         if (isEmpty())
             throw new IndexOutOfBoundsException("Queue is empty");

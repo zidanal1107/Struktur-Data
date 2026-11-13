@@ -7,25 +7,26 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    static boolean mainMenu(Scanner in,ControllerMenu menu,OrderManager orderManager) {
+    static boolean mainMenu(Scanner in, ControllerMenu menu, OrderManager orderManager) {
         System.out.println("=== Food Ordering System ===");
         System.out.println("1. Add Customer Order\n2. Display Active Orders\n3. Display Order Queue\n4. Process Next Order" +
-                "\n5. Undo Last Transaction\n6. Display Transaction History\n7. Exit");
+                "\n5. Undo Last Transaction\n6. Display Transaction History\n7. Remove Order\n8. Exit");
         System.out.print("Choose menu: ");
         int choice = in.nextInt();
         in.nextLine();
 
         switch (choice) {
-            case 1 -> menu.homeMenu(in,orderManager);
+            case 1 -> menu.homeMenu(in, orderManager);
             case 2 -> orderManager.display();
             case 3 -> orderManager.displayQueue();
             case 4 -> orderManager.processOrder();
             case 5 -> orderManager.undoTransaction();
             case 6 -> orderManager.transactionHistory();
-            case 7 -> {
+            case 7 -> orderManager.remove(in);
+            case 8 -> {
                 return false;
             }
-            default -> System.out.println("Invalid choice");
+            default -> System.out.println("\nInvalid choice\n");
         }
         return true;
     }
@@ -35,13 +36,15 @@ public class Main {
         OrderManager orderManager = new OrderManager();
         ControllerMenu controllerMenu = new ControllerMenu();
         boolean isRun = true;
-        try {
-            do {
-                isRun = mainMenu(in,controllerMenu, orderManager);
-            } while (isRun);
-        } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException e) {
-            System.out.println("ERROR: "+e.getMessage());
-        }
+        do {
+            try {
+                isRun = mainMenu(in, controllerMenu, orderManager);
+            } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException e) {
+                System.out.println("\nERROR: " + e.getMessage() + "\n");
+                in.nextLine();
+            }
+        } while (isRun);
+        in.close();
     }
 }
 

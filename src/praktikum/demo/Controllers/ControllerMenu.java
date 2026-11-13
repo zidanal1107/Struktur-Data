@@ -7,24 +7,6 @@ import praktikum.demo.Services.OrderItem;
 import java.util.Scanner;
 
 public class ControllerMenu {
-    public void menu(Scanner in, OrderManager orderManager) {
-        homeMenu(in, orderManager);
-        System.out.println("=== Find Order ===");
-        System.out.print("Input index data find: ");
-        int index = in.nextInt();
-        in.nextLine();
-        if (orderManager.findDatas(index)) {
-            System.out.println("data is found");
-        } else {
-            System.out.println("Data not found");
-        }
-        System.out.println("Input index remove: ");
-        int i = in.nextInt();
-        in.nextLine();
-        orderManager.remove(i);
-        orderManager.display();
-    }
-
     public void homeMenu(Scanner in, OrderManager orderManager) {
         char choice;
         do {
