@@ -3,7 +3,7 @@ package praktikum.module4;
 public class MainBST {
     static class Node {
         String ticketCode;
-        Node left,right;
+        Node left, right;
 
         public Node(String ticketCode) {
             this.ticketCode = ticketCode;
@@ -11,11 +11,13 @@ public class MainBST {
             this.right = null;
         }
     }
+
     private Node root;
 
     public void insert(String ticketCode) {
-        root = insertRec(root,ticketCode);
+        root = insertRec(root, ticketCode);
     }
+
     private Node insertRec(Node root, String ticketCode) {
         if (root == null) {
             return new Node(ticketCode);
@@ -33,10 +35,11 @@ public class MainBST {
         inorderRec(root);
         System.out.println();
     }
+
     private void inorderRec(Node root) {
         if (root != null) {
             inorderRec(root.left);
-            System.out.print(root.ticketCode+" ");
+            System.out.print(root.ticketCode + " ");
             inorderRec(root.right);
         }
     }
@@ -44,11 +47,12 @@ public class MainBST {
     public boolean search(String ticketCode) {
         return searchRec(root, ticketCode);
     }
+
     private boolean searchRec(Node root, String ticketCode) {
         if (root == null) return false;
         if (root.ticketCode.equals(ticketCode)) return true;
         if (ticketCode.compareTo(root.ticketCode) < 0)
-            return searchRec(root.left,ticketCode);
+            return searchRec(root.left, ticketCode);
         return searchRec(root.right, ticketCode);
     }
 
@@ -59,6 +63,7 @@ public class MainBST {
         }
         return current.ticketCode;
     }
+
     public String findMax() {
         Node current = root;
         while (current.right != null) {
@@ -70,6 +75,7 @@ public class MainBST {
     public void delete(String ticketCode) {
         root = deleteRec(root, ticketCode);
     }
+
     private Node deleteRec(Node root, String ticketCode) {
         if (root == null) return null;
 
@@ -101,11 +107,11 @@ public class MainBST {
 
         tree.inorderTraversal();
 
-        System.out.println("Search TTX-002: "+(tree.search("TTX-002") ? "Found":"Not found"));
-        System.out.println("Search TTX-099: "+(tree.search("TTX-099") ? "Found":"Not found"));
+        System.out.println("Search TTX-002: " + (tree.search("TTX-002") ? "Found" : "Not found"));
+        System.out.println("Search TTX-099: " + (tree.search("TTX-099") ? "Found" : "Not found"));
 
-        System.out.println("\nFirst ticket booked: "+tree.findMin());
-        System.out.println("Last ticket booked: "+tree.findMax());
+        System.out.println("\nFirst ticket booked: " + tree.findMin());
+        System.out.println("Last ticket booked: " + tree.findMax());
 
         System.out.println("\nCancelled TTX-002...");
         tree.delete("TTX-002");
