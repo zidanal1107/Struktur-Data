@@ -1,6 +1,6 @@
 package praktikum.module4;
 
-public class MainBST {
+public class MainTree {
     static class Node {
         String ticketCode;
         Node left, right;
@@ -78,7 +78,6 @@ public class MainBST {
 
     private Node deleteRec(Node root, String ticketCode) {
         if (root == null) return null;
-
         if (ticketCode.compareTo(root.ticketCode) < 0) {
             root.left = deleteRec(root.left, ticketCode);
         } else if (ticketCode.compareTo(root.ticketCode) > 0) {
@@ -97,7 +96,7 @@ public class MainBST {
     }
 
     public static void main(String[] args) {
-        MainBST tree = new MainBST();
+        MainTree tree = new MainTree();
 
         System.out.println("Booking TTX-003, TTX-001, TTX-004, TTX-002...");
         tree.insert("TTX-003");
